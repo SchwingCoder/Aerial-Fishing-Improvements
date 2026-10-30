@@ -42,6 +42,7 @@ public class MolchPearlChimePlugin extends Plugin
 	@Inject
 	private OverlayManager overlayManager;
 
+	@Inject
 	private MolchPearlChimeAudio audio;
 	private int previousPearlCount;
 	private boolean aerialFishing;
@@ -57,9 +58,6 @@ public class MolchPearlChimePlugin extends Plugin
 	{
 		previousPearlCount = 0;
 		aerialFishing = false;
-
-		audio = new MolchPearlChimeAudio();
-		audio.load();
 		overlayManager.add(pearlOverlay);
 	}
 
@@ -67,12 +65,6 @@ public class MolchPearlChimePlugin extends Plugin
 	protected void shutDown()
 	{
 		overlayManager.remove(pearlOverlay);
-
-		if (audio != null)
-		{
-			audio.close();
-			audio = null;
-		}
 
 		previousPearlCount = 0;
 		aerialFishing = false;
@@ -215,3 +207,4 @@ public class MolchPearlChimePlugin extends Plugin
 		}
 	}
 }
+

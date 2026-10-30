@@ -14,6 +14,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.Player;
 import net.runelite.api.Point;
@@ -23,6 +24,7 @@ import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
 
+@Slf4j
 public class MolchPearlChimeOverlay extends Overlay
 {
     private static final Color OUTLINE_COLOR = new Color(45, 32, 15);
@@ -67,8 +69,7 @@ public class MolchPearlChimeOverlay extends Overlay
             {
                 if (stream == null)
                 {
-                    System.err.println(
-                            "Molch Pearl Chime: Font not found: " + resource);
+                    log.warn("Font resource not found: {}", resource);
                     continue;
                 }
 
@@ -77,9 +78,7 @@ public class MolchPearlChimeOverlay extends Overlay
             }
             catch (IOException | java.awt.FontFormatException ex)
             {
-                System.err.println(
-                        "Molch Pearl Chime: Could not load font: " + resource);
-                ex.printStackTrace();
+                log.warn("Unable to load font resource: {}", resource, ex);
             }
         }
     }
@@ -212,3 +211,5 @@ public class MolchPearlChimeOverlay extends Overlay
         return null;
     }
 }
+
+
